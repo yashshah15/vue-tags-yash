@@ -31,6 +31,8 @@
     "name": "none"
   },
   "dependencies": {
+    "terser-webpack-plugin": "^5.3.3",
+    "uglify-js": "git+https://github.com/mishoo/UglifyJS2.git#harmony",
     "v-hover": "^0.2.0",
     "vue": "^2.5.16"
   },
@@ -64,6 +66,7 @@
     "style-loader": "^0.18.2",
     "testcafe": "^0.18.5",
     "testcafe-vue-selectors": "^2.1.0",
+    "uglifyjs-webpack-plugin": "^1.3.0",
     "url-loader": "^0.6.2",
     "vue-loader": "^13.7.1",
     "vue-router": "^3.0.1",

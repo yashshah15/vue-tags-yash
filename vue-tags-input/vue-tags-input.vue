@@ -83,7 +83,7 @@
               </slot>
             </div>
           </div>
-          <div v-if="show === index" class="actions">
+          <div v-if="true" class="actions">
             <!-- dont use v-if and v-else here -> different event calling when click -->
             <i
               @click="cancelEdit(index)"

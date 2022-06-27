@@ -6,7 +6,8 @@ const CleanPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const env = process.env.NODE_ENV;
-
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const TerserPlugin = require("terser-webpack-plugin");
 const output = {
   path: path.resolve(__dirname, './dist'),
   publicPath: '/',
@@ -31,7 +32,33 @@ module.exports = {
       amd: 'vue',
     } : false,
   },
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+      sourceMap: true,
+      mangle: true,
+      compress: {
+        warnings: false, // Suppress uglification warnings
+        unsafe: true,
+        'pure_getters': true,
+        'unsafe_comps': true,
+        'screw_ie8': true,
+      },
+      output: {
+        comments: false,
+      },
+      exclude: [/\.min\.js$/gi],
+        terserOptions: {
+          ecma: 6,
+          warnings: false,
+          parse: {},
+          compress: {}
+        },
+      }),
+    ],
+  },
   module: {
+
     rules: [
       {
         test: /\.vue$/,
@@ -176,21 +203,31 @@ if (env === 'buildLib' || env === 'buildDocs') {
   module.exports.devtool = '#source-map';
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      mangle: true,
-      compress: {
-        warnings: false, // Suppress uglification warnings
-        unsafe: true,
-        'pure_getters': true,
-        'unsafe_comps': true,
-        'screw_ie8': true,
-      },
-      output: {
-        comments: false,
-      },
-      exclude: [/\.min\.js$/gi], // skip pre-minified libs
-    }),
+    // new webpack.optimize.UglifyJsPlugin({
+      // sourceMap: true,
+      // mangle: true,
+      // compress: {
+      //   warnings: false, // Suppress uglification warnings
+      //   unsafe: true,
+      //   'pure_getters': true,
+      //   'unsafe_comps': true,
+      //   'screw_ie8': true,
+      // },
+      // output: {
+      //   comments: false,
+      // },
+      // exclude: [/\.min\.js$/gi], // skip pre-minified libs
+    // }),
+//     new UglifyJsPlugin({
+//       "uglifyOptions":
+//           {
+//               compress: {
+//                   warnings: false
+//               },
+//               sourceMap: true
+//           }
+//   }
+// ),
     new webpack.LoaderOptionsPlugin({
       minimize: true,
     }),

@@ -43,11 +43,11 @@ export default {
     createClasses,
     // Returns the index which item should be selected, based on the parameter 'method'
     showw(index){
-      this.show = index
-      console.log("In Show")
+      this.show = index;
+      console.log("In Show");
     },
     hidee(){
-      this.show = null
+      this.show = null;
     },
     getSelectedIndex(method) {
       const items = this.filteredAutocompleteItems;
