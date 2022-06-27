@@ -44,6 +44,7 @@ export default {
     // Returns the index which item should be selected, based on the parameter 'method'
     showw(index){
       this.show = index;
+      console.log(index, "##")
       console.log("In Show");
     },
     hidee(){
